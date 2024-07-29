@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Stay Wild Home Stay</title>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/responsive.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" type="text/css">
+<link href="css/index1.css" rel="stylesheet">
+<!--for menu-->
+<link rel="stylesheet" href="css/styles-menu.css">
+<link rel="stylesheet" href="css/style1.css" />
+<!--for menu-->
+<link rel="stylesheet" href="css/styles-menu.css">
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="js/script-menu.js"></script>
+<script src="js/bootbox.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel='stylesheet'  href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type='text/css' media='all' />
+<script language ="javascript" src="js/jquery-1.4.4.min.js" type ="text/javascript" ></script>
+<style>
+table, th, tr, td {
+    font-family: Raleway; font-size: 13px; font-weight: 600;color: #141212; width:500px;
+}
+</style>
+<script type="text/javascript">
+    function validate() 
+    {
+        if ($("#txtname").val() == "")
+         {
+            alert("Please enter Firstname");
+            $("#txtname").focus();
+            return false;
+         }
+//        if ($("#txtlast").val() == "") {
+//            alert("Please Enter Last Name");
+//            $("#txtlast").focus();
+//            return false;
+//        }
+        if ($("#txtemail").val() == "") 
+        {
+
+            alert("Please enter email ID");
+            $("#txtemail").focus();
+            return false;
+        }
+        if (document.getElementById("txtemail").value != "") {
+            var mail = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/; ;
+            if (document.getElementById("txtemail").value.match(mail)) {
+
+            }
+            else {
+                alert("Please enter Valid Email ID");
+                $("#txtemail").focus();
+                return false;
+            }
+        }
+        if ($("#txtdeparure").val() == "DD/MM/YYYY") {
+            alert("Please select depature date");
+            $("#txtdeparure").focus();
+            return false;
+        }
+
+        if ($("#txtcomment").val() == "") {
+            alert("Please enter your Comments or Suggestions");
+            $("#txtcomment").focus();
+            return false;
+        }
+//        alert("Thank You for your Feedback");
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "insert.aspx/getfeedback",
+            data: '',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                var list = r.d;
+                if (list.length > 0) {
+
+                    var table = '';
+                    table = table + '';
+                    var rowcount = list.length / 3;
+                    for (var i = 0; i < rowcount; i++) {
+                        for (var j = 0; j < 3; j++) {
+                            var index = i * 3 + j;
+                            if (index < list.length) {
+                                //alert(index);
+                                table = table + '<div class="comm1"><div class="commname"><i class="fa fa-user" aria-hidden="true"></i> ' + list[index].firstname;
+                                table = table + '</div><div class="commdate">' + list[index].departuredate;
+                                table = table + '</div><br /><div class="commenettext">' + list[index].comments;
+                                table = table + '</div></div>';
+                            }
+
+                        }
+                        table = table + '';
+
+                    }
+
+                    table = table + '</table>';
+                    $("#divcategory").append(table);
+                }
+            }
+        });
+    });
+</script>
+
+<!-- Include jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script>
+    var j = jQuery.noConflict();
+    j(function () {
+        j('#txtdeparure').datepicker({ dateFormat: 'dd/mm/yy' }).val();
+    });
+    function hideIcon(self) {
+        self.style.backgroundImage = 'none';
+    }
+</script>
+</head>
+<body>
+    <form method="post" action="./feedback.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE1NzM5OTc0NjRkZH1p7GHxcnU0tFk313ZDqGSn9dyIm4egQAUxc57mBS4M" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="96C56D28" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdABs3bUhu4gwCIvbcONLHUVn0VCDn2pfngd5PSl9R1fd0WLSnUoo/Bq+NA4lEt6HM8VHCxAdlKC1qTQZyRV/fSvcHY0CLmx7mU6OERZdeigm3khnsLOppL1eN5VlfTg2OIBgvH6OkZidz/qNV0mDPy/57kR096982f0li8QtoOVguJ2kJHgnXAfvn0oYJTHIwYbeWECZPQRLurjTFVUPTWENWi42gNO9CeuZaIPpc3JdrXfF0F6jo4zr1nBkkO1Edvjrjemwsx6MkL40yuS4G6O20PyH1xvciOExuxCJQIi+0GlxANYx0c6w0ViuNlEx+P6MKY3ToY/IaNSbhuzjlhEjJceQvaer5us6CeiFFelNTENpPOt3igL55uPR5s34E4OB1+h9F1NDOn9Eix4ruel8qJfwxr+aoJ6MIcFaq1F9u4+1l3dny643wm0XhKb6EBaTFnSnYprl1TIZp51u/f0/mQQ0A/TWr8/GBA7R4KEFbQw6ydWRZAvli8enJABJhDSPqnIqnwdddOgZvYPaHdBwgJSm/U8T2BQ/kzo/6IuyjyM34O/GfAV4V4n0wgFZHr3fmuyOkXzmEVsR3ezlWtvDkSNDuEZ1xTZDcTVa0h8GVEw==" />
+</div>
+    <div>
+           <div class="page-wrapper"> 
+
+ 	
+    <!-- Main Header-->
+         <div class="header-upper">
+        	<div class="auto-container">
+            	<div class="clearfix">
+                	<div class="mob">
+                    <div class="feedback1" id="mobile1">
+                    <p> 
+                   <i class="fa fa-phone" style="color: #7811aa;"></i> +91 72042 07367 / 99011 57799&nbsp;
+                   <a href="feedback.aspx" style="color:#777"><i class="fa fa-comment" style="color: #7811aa;"></i> Feedback </div>
+                    </div>
+                    <div class="mob1">
+                    <div class="part1">
+                    <a href="index.html"><img src="images/logo11.jpg"  title="Stay Wild Home Stay" alt="Stay Wild Home Stay"></a>
+                        </div>
+                <div class="part2" id="mobile">
+                                <p> 
+                   <i class="fa fa-phone" style="color: #7811aa;"></i> +91 72042 07367 / 99011 57799&nbsp;
+                   <a href="feedback.aspx" style="color:#777"><i class="fa fa-comment" style="color: #7811aa;"></i> Feedback</a></p>
+                </div>
+                    <div class="fb1">
+                  
+                         <nav class="main-menu">
+                        <div class="navbar-header">
+                            <!-- Toggle Button -->    	
+                        </div>
+                        
+                        <div id='cssmenu'>
+<ul>
+   <li><a href="index.html"><span style="color:#fffb58;"> HOME</span></a></li>
+   <li><a href="about.html"><span> ABOUT HOST</span></a></li>
+   <li><a href="facilities.html"><span> FACILITIES</span></a></li>
+   <li><a href="tariffs.html"><span> TARIFFS</span></a></li>
+   <li><a href="gallery.html"><span> GALLERY</span></a> </li>
+   <li><a href="bestplaces.html"><span> BEST PLACES</span></a></li>
+   <li ><a href="book.html"><span  > BOOK</span></a></li>
+  <li ><a  href="location.html"><span > LOCATION</span></a></li>
+  
+</ul>
+</div>
+ </nav>
+</div>
+ <div class="fb">
+ <a href="https://www.facebook.com/staywildcoorg/" target="_blank"><img src="images/fb.png" /></a>
+                    </div>
+                    </div>
+                    </div>
+      
+        </div>
+        </div>
+        
+    <!--Header-Lower-->
+        <div class="header-lower">
+        	<!--Background Layer-->
+       
+        <!--Sticky Header-->
+        <div class="sticky-header">
+        	<div class="auto-container clearfix">
+            	<!--Logo-->
+            
+                
+                <!--Right Col-->
+                <div class="right-col pull-right">
+                	<!-- Main Menu -->
+                    <nav class="main-menu">
+                        <div class="navbar-header">
+                            <!-- Toggle Button -->    	
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>                            </button>
+                        </div>
+                    </nav><!-- Main Menu End-->
+                </div>
+            </div>
+        </div><!--End Bounce In Header-->
+    </div>
+</header>
+<br />
+<br />
+<br />
+<br />
+
+  <!--End Main Header --><div class="clearfix"></div>
+    <div class="smallban">
+    <div class="auto-container">
+    <h1 > FeedBack</h1>
+  
+   
+   </div><!--container ends-->
+    </div><!--small ends-->
+    
+    <!--Main Slider-->
+    <div class="about">
+    <div class="main">
+     <div class="con">
+     <div class="enquiry">
+     
+     <div class="form">
+    <div class="abt">    <p><b>Your First Name<span style="color:Red;">*</span></b></p></div>
+    <div class="abt1">   
+    
+    <input name="txtname" type="text" id="txtname" placeholder="Enter firstname..." class="certificate" />
+    </div>
+      
+      </div>
+           
+         
+      <div class="form1">
+      <div class="abt">    <p><b>Your Last Name</b></p></div>
+       <div class="abt1">
+       
+       <input name="txtlast" type="text" id="txtlast" placeholder="Enter lastname..." class="certificate" /> 
+       </div>      
+        </div>   
+   
+    <div class="form">
+      <div class="abt">    <p><b>Your Email Id<span style="color:Red;">*</span></b></p></div>
+        <div class="abt1">
+        
+        <input name="txtemail" type="text" id="txtemail" placeholder="Enter email Id..." class="certificate" /> 
+        </div>
+        
+    </div>
+           
+    <div class="form1">
+        <div class="abt">    <p><b>Select Depature Date<span style="color:Red;">*</span></b></p></div>
+        <div class="abt1">
+
+        <input name="txtdeparure" type="text" id="txtdeparure" class="certificate" placeholder="DD/MM/YYYY" value="DD/MM/YYYY" />
+      
+            <i class="fa fa-calendar search-calendar" aria-hidden="true"></i></div>
+            
+     </div>
+
+    <div class="radio">  
+        <form action="">
+        <p><b>Your Feedback on Food</b></p>
+         <table id="RadioButtonList1">
+	<tr>
+		<td><input id="RadioButtonList1_0" type="radio" name="RadioButtonList1" value="Excellent" /><label for="RadioButtonList1_0">Excellent</label></td>
+	</tr><tr>
+		<td><input id="RadioButtonList1_1" type="radio" name="RadioButtonList1" value="Good" /><label for="RadioButtonList1_1">Good</label></td>
+	</tr><tr>
+		<td><input id="RadioButtonList1_2" type="radio" name="RadioButtonList1" value="Satisfactory" /><label for="RadioButtonList1_2">Satisfactory</label></td>
+	</tr><tr>
+		<td><input id="RadioButtonList1_3" type="radio" name="RadioButtonList1" value="Uncomfortable" /><label for="RadioButtonList1_3">Uncomfortable</label></td>
+	</tr>
+</table>
+    </form>     
+   </div>          
+             
+             
+    <div class="radio">  
+        <form action="">
+        <p><b>Feedback on Accommodation</b></p>
+         <table id="RadioButtonList2">
+	<tr>
+		<td><input id="RadioButtonList2_0" type="radio" name="RadioButtonList2" value="Excellent" /><label for="RadioButtonList2_0">Excellent</label></td>
+	</tr><tr>
+		<td><input id="RadioButtonList2_1" type="radio" name="RadioButtonList2" value="Good" /><label for="RadioButtonList2_1">Good</label></td>
+	</tr><tr>
+		<td><input id="RadioButtonList2_2" type="radio" name="RadioButtonList2" value="Satisfactory" /><label for="RadioButtonList2_2">Satisfactory</label></td>
+	</tr><tr>
+		<td><input id="RadioButtonList2_3" type="radio" name="RadioButtonList2" value="Uncomfortable" /><label for="RadioButtonList2_3">Uncomfortable</label></td>
+	</tr>
+</table>
+        </form>     
+   </div>             
+             
+             
+     <div class="radio">  
+        <form action="">
+        <p><b>Your Feedback on Guidance</b></p>
+        <table id="RadioButtonList3">
+	<tr>
+		<td><input id="RadioButtonList3_0" type="radio" name="RadioButtonList3" value="Excellent" /><label for="RadioButtonList3_0">Excellent</label></td>
+	</tr><tr>
+		<td><input id="RadioButtonList3_1" type="radio" name="RadioButtonList3" value="Good" /><label for="RadioButtonList3_1">Good</label></td>
+	</tr><tr>
+		<td><input id="RadioButtonList3_2" type="radio" name="RadioButtonList3" value="Satisfactory" /><label for="RadioButtonList3_2">Satisfactory</label></td>
+	</tr><tr>
+		<td><input id="RadioButtonList3_3" type="radio" name="RadioButtonList3" value="Uncomfortable" /><label for="RadioButtonList3_3">Uncomfortable</label></td>
+	</tr>
+</table>
+        </form>     
+   </div>         
+      
+    <div class="radio">  
+        <form action="">
+        <p><b>Your Feedback on Transportation Vehicle</b></p>
+        <table id="RadioButtonList4">
+	<tr>
+		<td><input id="RadioButtonList4_0" type="radio" name="RadioButtonList4" value="Excellent" /><label for="RadioButtonList4_0">Excellent</label></td>
+	</tr><tr>
+		<td><input id="RadioButtonList4_1" type="radio" name="RadioButtonList4" value="Good" /><label for="RadioButtonList4_1">Good</label></td>
+	</tr><tr>
+		<td><input id="RadioButtonList4_2" type="radio" name="RadioButtonList4" value="Satisfactory" /><label for="RadioButtonList4_2">Satisfactory</label></td>
+	</tr><tr>
+		<td><input id="RadioButtonList4_3" type="radio" name="RadioButtonList4" value="Uncomfortable" /><label for="RadioButtonList4_3">Uncomfortable</label></td>
+	</tr>
+</table>
+        </form>     
+   </div>          
+             
+    <div class="form6">
+        <div class="abt">    <p><b>Your Comments Or Suggestions<span style="color:Red;">*</span></b></p></div>
+            <div class="abt1">
+            
+         <textarea name="txtcomment" rows="2" cols="20" id="txtcomment" placeholder="Enter Your Comments Or Suggestions..." class="certificate" name="Topic Name">
+</textarea>
+    </div>
+    </div> 
+ 
+   <div class="form7" style="border:none; ">
+         
+        <input type="submit" name="Button1" value="Submit" onclick="return validate();" id="Button1" class="itg-button" style="cursor:pointer; margin-top: 10px;" />
+    </div>
+     </div>
+
+     <div class="comm">
+     <p> What visitors are saying..</p><br /><br />
+     <div class="about" id="divcategory">
+	
+	</div>
+ 
+
+    </div>
+   
+ 
+
+    </div>
+  
+ 
+  </div>
+  </div>
+   </div>
+   
+<div class="clearfix"></div>
+   <div class="clearfix"></div> 
+  
+    <!--Main Footer-->
+    <footer class="main-footer">
+    	<!--Footer Bar-->
+        <div class="footer-bar">
+   
+            	<ul>
+                <li style="border-left:none"><a href="#"><strong style="color:#b48ed2; font-size:20px; text-transform:capitalize; font-weight:500">Quick Links</strong></a></li>
+                	<li><a href="index.html"><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Home</a></li>
+                    <li><a href="about.html"  ><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;About Host</a></li>
+                      <li><a href="facilities.html"  ><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Facilities</a></li>
+                       
+                          <li><a href="tariffs.html"  ><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Tariffs</a></li>
+                            <li><a href="gallery.html"  ><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Gallery</a></li>
+                              <li><a href="bestplaces.html"  ><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Best Places</a></li>
+                                <li><a href="book.html"  ><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Book</a></li>
+                                <li><a href="location.html"> <i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Location</a></li>
+                </ul>
+            </div>
+    
+        
+    <!--Footer Bottom-->
+        <div class="footer-bottom">
+        	<div class="auto-container">
+            	<div class="centered-content">
+        
+                    <div class="copyright">All rights reserved to <a href="index.html">Stay Wild Home Stay</a><br />
+ Site by <a href="http://www.websmartindia.com/" target="_blank"> Websmartindia</a></div>
+                </div>
+            </div>
+        </div>
+        
+</footer>
+  
+
+    </div>
+    </div>
+    </form>
+</body>
+</html>

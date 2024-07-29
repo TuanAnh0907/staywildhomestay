@@ -1,0 +1,704 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Stay Wild Home Stay</title>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/responsive.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" type="text/css">
+<link href="css/index1.css" rel="stylesheet">
+<!--for menu-->
+<link rel="stylesheet" href="css/styles-menu.css">
+<link rel="stylesheet" href="css/style1.css" />
+<!--for menu-->
+<link rel="stylesheet" href="css/styles-menu.css">
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="js/script-menu.js"></script>
+<!--calender-->
+
+<script language ="javascript" src="js/jquery-1.4.4.min.js" type ="text/javascript" ></script>
+<script language ="javascript" src="js/alertify.min.js" type ="text/javascript" ></script>
+<script language ="javascript" src="js/alertify.js" type ="text/javascript" ></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<style type="text/css">
+alert 
+{
+    border: 5px solid red;
+    border-radius: 12px;
+}
+</style>
+<script src="js/jquery-1.4.4.min.js" type="text/javascript"></script>
+
+<script type="text/javascript" >
+    function on() 
+    {
+//        document.getElementById('bookname').innerHTML = document.getElementById("book").innerHTML;
+                document.getElementById('txtname').value = "";
+                document.getElementById('txtlast').value = "";
+                document.getElementById('bookphoneno').value = "";
+                document.getElementById('bookemail').value = "";
+                document.getElementById('txtdeparure').value = "DD/MM/YYYY";
+                document.getElementById('txtcheckout').value = "DD/MM/YYYY";
+                document.getElementById("overlay").style.display = "block";
+    }
+    function funsubmit()
+     {
+        if (document.getElementById("txtname").value == "") {
+            alert("Please enter First Name");
+            document.getElementById("txtname").focus();
+            return false;
+        }
+        if (document.getElementById("txtlast").value == "") {
+            alert("Please enter Last Name");
+            document.getElementById("txtlast").focus();
+            return false;
+        }
+
+        if (document.getElementById("bookphoneno").value == "") {
+            alert("Please enter Mobile Number");
+            document.getElementById("bookphoneno").focus();
+            return false;
+        }
+        if (document.getElementById("bookphoneno").value != "") {
+            var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+            if (document.getElementById("bookphoneno").value.match(phoneno)) {
+
+            }
+            else {
+                alert("Please enter valid Phone Number");
+                document.getElementById("bookphoneno").focus();
+                return false;
+            }
+        }
+        if ($("#bookemail").val() == "") {
+            alert("Please enter email ID");
+            $("#bookemail").focus();
+            return false;
+        }
+        if (document.getElementById("bookemail").value != "") {
+            var mail = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/; ;
+            if (document.getElementById("bookemail").value.match(mail)) {
+
+            }
+            else {
+                alert("Please enter Valid Email ID");
+                $("#bookemail").focus();
+                return false;
+            }
+        }
+        if ($("#txtdeparure").val() == "DD/MM/YYYY") 
+        {
+            alert("Please select Check-IN");
+            $("#txtdeparure").focus();
+            return false;
+        }
+        if ($("#txtcheckout").val() == "DD/MM/YYYY") 
+        {
+            alert("Please select Check-OUT");
+            $("#txtcheckout").focus();
+            return false;
+        }
+        $.ajax({
+
+            type: 'POST',
+
+            contentType: "application/json; charset=utf-8",
+
+            url: 'insert.aspx/Insertcontact',
+
+            data: "{'Namee':'" + document.getElementById('txtname').value + "','Name':'" + document.getElementById('txtlast').value + "', 'Phone':'" + document.getElementById('bookphoneno').value + "','Email':'" + document.getElementById('bookemail').value + "','Checkin':'" + document.getElementById('txtdeparure').value + "','Checkout':'" + document.getElementById('txtcheckout').value + "'}",
+
+            async: false,
+
+            success: function (response) {
+                document.getElementById('txtname').value = "";
+                document.getElementById('txtlast').value = "";
+                document.getElementById('bookphoneno').value = "";
+                document.getElementById('bookemail').value = "";
+                document.getElementById('txtdeparure').value = "DD/MM/YYYY";
+                document.getElementById('txtcheckout').value = "DD/MM/YYYY";
+                document.getElementById("overlay").style.display = "none";
+                alert("Thank You, We will get back to you soon");
+            },
+
+            error: function ()
+
+            { alert('Thank You'); }
+
+        });
+    }
+    function off() {
+        document.getElementById("overlay").style.display = "none";
+    }
+    function on1() {
+        //        document.getElementById('bookname').innerHTML = document.getElementById("book").innerHTML;
+        document.getElementById('txtname1').value = "";
+        document.getElementById('txtlast1').value = "";
+        document.getElementById('bookphoneno1').value = "";
+        document.getElementById('bookemail1').value = "";
+        document.getElementById('txtdeparure1').value = "DD/MM/YYYY";
+        document.getElementById('txtcheckout1').value = "DD/MM/YYYY";
+        document.getElementById("overlay1").style.display = "block";
+    }
+    function funsubmit1() {
+        if (document.getElementById("txtname1").value == "") {
+            alert("Please enter First Name");
+            document.getElementById("txtname1").focus();
+            return false;
+        }
+        if (document.getElementById("txtlast1").value == "") {
+            alert("Please enter Last Name");
+            document.getElementById("txtlast1").focus();
+            return false;
+        }
+
+        if (document.getElementById("bookphoneno1").value == "") {
+            alert("Please enter Mobile Number");
+            document.getElementById("bookphoneno1").focus();
+            return false;
+        }
+        if (document.getElementById("bookphoneno1").value != "") {
+            var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+            if (document.getElementById("bookphoneno1").value.match(phoneno)) {
+
+            }
+            else {
+                alert("Please enter valid Phone Number");
+                document.getElementById("bookphoneno1").focus();
+                return false;
+            }
+        }
+        if ($("#bookemail1").val() == "") {
+            alert("Please enter email ID");
+            $("#bookemail1").focus();
+            return false;
+        }
+        if (document.getElementById("bookemail1").value != "") {
+            var mail = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/; ;
+            if (document.getElementById("bookemail1").value.match(mail)) {
+
+            }
+            else {
+                alert("Please enter Valid Email ID");
+                $("#bookemail1").focus();
+                return false;
+            }
+        }
+        if ($("#txtdeparure1").val() == "DD/MM/YYYY") {
+            alert("Please select Check-IN");
+            $("#txtdeparure1").focus();
+            return false;
+        }
+        if ($("#txtcheckout1").val() == "DD/MM/YYYY") {
+            alert("Please select Check-OUT");
+            $("#txtcheckout1").focus();
+            return false;
+        }
+        $.ajax({
+
+            type: 'POST',
+
+            contentType: "application/json; charset=utf-8",
+
+            url: 'insert.aspx/Insertcontact1',
+
+            data: "{'Namee':'" + document.getElementById('txtname1').value + "','Name':'" + document.getElementById('txtlast1').value + "', 'Phone':'" + document.getElementById('bookphoneno1').value + "','Email':'" + document.getElementById('bookemail1').value + "','Checkin':'" + document.getElementById('txtdeparure1').value + "','Checkout':'" + document.getElementById('txtcheckout1').value + "'}",
+
+            async: false,
+
+            success: function (response) {
+                document.getElementById('txtname1').value = "";
+                document.getElementById('txtlast1').value = "";
+                document.getElementById('bookphoneno1').value = "";
+                document.getElementById('bookemail1').value = "";
+                document.getElementById('txtdeparure1').value = "DD/MM/YYYY";
+                document.getElementById('txtcheckout1').value = "DD/MM/YYYY";
+                document.getElementById("overlay1").style.display = "none";
+                alert("Thank You, We will get back to you soon");
+            },
+
+            error: function ()
+
+            { alert('Thank You'); }
+
+        });
+    }
+    function off1() {
+        document.getElementById("overlay1").style.display = "none";
+    }
+
+
+    function on2() 
+    {
+        //        document.getElementById('bookname').innerHTML = document.getElementById("book").innerHTML;
+        document.getElementById('txtname2').value = "";
+        document.getElementById('txtlast2').value = "";
+        document.getElementById('bookphoneno2').value = "";
+        document.getElementById('bookemail2').value = "";
+        document.getElementById('txtdeparure2').value = "DD/MM/YYYY";
+        document.getElementById('txtcheckout2').value = "DD/MM/YYYY";
+        document.getElementById("overlay2").style.display = "block";
+    }
+    function funsubmit2() {
+        if (document.getElementById("txtname2").value == "") {
+            alert("Please enter First Name");
+            document.getElementById("txtname2").focus();
+            return false;
+        }
+        if (document.getElementById("txtlast2").value == "") {
+            alert("Please enter Last Name");
+            document.getElementById("txtlast2").focus();
+            return false;
+        }
+
+        if (document.getElementById("bookphoneno2").value == "") {
+            alert("Please enter Mobile Number");
+            document.getElementById("bookphoneno2").focus();
+            return false;
+        }
+        if (document.getElementById("bookphoneno2").value != "") {
+            var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+            if (document.getElementById("bookphoneno2").value.match(phoneno)) {
+
+            }
+            else {
+                alert("Please enter valid Phone Number");
+                document.getElementById("bookphoneno2").focus();
+                return false;
+            }
+        }
+        if ($("#bookemail2").val() == "") {
+            alert("Please enter email ID");
+            $("#bookemail2").focus();
+            return false;
+        }
+        if (document.getElementById("bookemail2").value != "") {
+            var mail = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/; ;
+            if (document.getElementById("bookemail2").value.match(mail)) {
+
+            }
+            else {
+                alert("Please enter Valid Email ID");
+                $("#bookemail2").focus();
+                return false;
+            }
+        }
+        if ($("#txtdeparure2").val() == "DD/MM/YYYY") {
+            alert("Please select Check-IN");
+            $("#txtdeparure2").focus();
+            return false;
+        }
+        if ($("#txtcheckout2").val() == "DD/MM/YYYY") {
+            alert("Please select Check-OUT");
+            $("#txtcheckout2").focus();
+            return false;
+        }
+        $.ajax({
+
+            type: 'POST',
+
+            contentType: "application/json; charset=utf-8",
+
+            url: 'insert.aspx/Insertcontact2',
+
+            data: "{'Namee':'" + document.getElementById('txtname2').value + "','Name':'" + document.getElementById('txtlast2').value + "', 'Phone':'" + document.getElementById('bookphoneno2').value + "','Email':'" + document.getElementById('bookemail2').value + "','Checkin':'" + document.getElementById('txtdeparure2').value + "','Checkout':'" + document.getElementById('txtcheckout2').value + "'}",
+
+            async: false,
+
+            success: function (response) {
+                document.getElementById('txtname2').value = "";
+                document.getElementById('txtlast2').value = "";
+                document.getElementById('bookphoneno2').value = "";
+                document.getElementById('bookemail2').value = "";
+                document.getElementById('txtdeparure2').value = "DD/MM/YYYY";
+                document.getElementById('txtcheckout2').value = "DD/MM/YYYY";
+                document.getElementById("overlay2").style.display = "none";
+                alert("Thank You, We will get back to you soon");
+            },
+
+            error: function ()
+
+            { alert('Thank You'); }
+
+        });
+    }
+    function off2() {
+        document.getElementById("overlay2").style.display = "none";
+    }
+</script>
+
+<!-- Include jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script>
+    var j = jQuery.noConflict();
+    j(function () {
+        j('#txtdeparure').datepicker({ dateFormat: 'dd/mm/yy' }).val();
+        j('#txtcheckout').datepicker({ dateFormat: 'dd/mm/yy' }).val();
+        j('#txtdeparure1').datepicker({ dateFormat: 'dd/mm/yy' }).val();
+        j('#txtcheckout1').datepicker({ dateFormat: 'dd/mm/yy' }).val();
+        j('#txtdeparure2').datepicker({ dateFormat: 'dd/mm/yy' }).val();
+        j('#txtcheckout2').datepicker({ dateFormat: 'dd/mm/yy' }).val();
+    });
+    function hideIcon(self) {
+        self.style.backgroundImage = 'none';
+    }
+</script>
+</head>
+
+<body>
+<div class="page-wrapper"> 
+
+ 	
+    <!-- Main Header-->
+         <div class="header-upper">
+        	<div class="auto-container">
+            	<div class="clearfix">
+                	<div class="mob">
+                    <div class="feedback1" id="mobile1">
+                    <p> 
+                   <i class="fa fa-phone" style="color: #7811aa;"></i> +91 72042 07367 / 99011 57799&nbsp;
+                   <a href="feedback.aspx" style="color:#777"><i class="fa fa-comment" style="color: #7811aa;"></i> Feedback</a></p>
+                    </div>
+                    </div>
+                    <div class="mob1">
+                    <div class="part1">
+                    <a href="index.html"><img src="images/logo11.jpg"  title="Stay Wild Home Stay" alt="Stay Wild Home Stay"></a>
+                        </div>
+                <div class="part2" id="mobile">
+                                <p> 
+                   <i class="fa fa-phone" style="color: #7811aa;"></i> +91 72042 07367 / 99011 57799&nbsp;
+                   <a href="feedback.aspx" style="color:#777"><i class="fa fa-comment" style="color: #7811aa;"></i> Feedback</a></p>
+                </div>
+                    <div class="fb1">
+                  
+                         <nav class="main-menu">
+                        <div class="navbar-header">
+                            <!-- Toggle Button -->    	
+                        </div>
+                        
+                        <div id='cssmenu'>
+<ul>
+   <li><a href="index.html"><span style="color:#fffb58;"> HOME</span></a></li>
+   <li><a href="about.html"><span> ABOUT HOST</span></a></li>
+   <li><a href="facilities.html"><span> FACILITIES</span></a></li>
+   <li><a href="tariffs.html"><span> TARIFFS</span></a></li>
+   <li><a href="gallery.html"><span> GALLERY</span></a> </li>
+   <li><a href="bestplaces.html"><span> BEST PLACES</span></a></li>
+   <li ><a href="book.html"><span  > BOOK</span></a></li>
+  <li ><a  href="location.html"><span > LOCATION</span></a></li>
+  
+</ul>
+</div>
+ </nav>
+</div>
+ <div class="fb">
+ <a href="https://www.facebook.com/staywildcoorg/" target="_blank"><img src="images/fb.png" /></a>
+                    </div>
+                    </div>
+                    </div>
+      
+        </div>
+        </div>
+        
+    <!--Header-Lower-->
+        <div class="header-lower">
+        	<!--Background Layer-->
+       
+        <!--Sticky Header-->
+        <div class="sticky-header">
+        	<div class="auto-container clearfix">
+            	<!--Logo-->
+            
+                
+                <!--Right Col-->
+                <div class="right-col pull-right">
+                	<!-- Main Menu -->
+                    <nav class="main-menu">
+                        <div class="navbar-header">
+                            <!-- Toggle Button -->    	
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>                            </button>
+                        </div>
+                    </nav><!-- Main Menu End-->
+                </div>
+            </div>
+        </div><!--End Bounce In Header-->
+    </div>
+</header>
+<br />
+<br />
+<br />
+<br />
+
+
+  <!--End Main Header --><div class="clearfix"></div>
+    <div class="smallban">
+    <div class="auto-container">
+    <h1 > BOOK</h1>
+  
+   
+   </div><!--container ends-->
+    </div><!--small ends-->
+    
+    <!--Main Slider-->
+    <div class="about">
+    <div class="main">
+   
+
+ <section class="property-info-sec">
+    	<div class="auto-container">
+        	<div class="row clearfix">
+            	<!--Description Column-->
+                <div class="desc-column col-md-12 col-sm-12 col-xs-12">
+                	<!--Section Title-->
+                    <div class="sec-title">
+       
+                        <!--<h2><strong>why   </strong> choose us?</h2>-->
+                        <!--<div class="linee3"></div>
+                <div class="linee4"></div>-->
+                    </div>
+                      <div class="most"  style="overflow-x:hidden">
+                    <div class="row clearfix">
+
+                    	<!--Circular Image Column-->
+                        <div class="circular-image-column col-md-4 col-sm-4 col-xs-6">
+                        	    <figure class="image-box wow " data-wow-duration="1500ms" data-wow-delay="0ms">
+                                <img src="images/book1.jpg" onclick="on()" alt="Couple Room" style="width: 100%; cursor:pointer;"></figure>
+                              <h3 style="color:#d6083f; font-size:18px; text-align:center; padding-top:7px;"><b>Couple Room</b></h3>
+                              </div>
+                              <div id="overlay" >
+                    <div class="mainover">
+  	                <div class="formover">
+  	                <div class="clos" onclick="off()"> X </div>
+                    <span>Couple Room Booking</span><br />
+ 		            <div class="form1over"> 
+                    
+                   <div class="form">
+                            <div class="abt">    <p><b>Your First Name<span style="color:Red;margin-left: 0px;">*</span></b></p></div> 
+                             <div class="abt1"> <input type="text" placeholder="Enter first name.. " id="txtname" /></div>
+                    </div>
+          
+         
+                    <div class="form1">
+                        <div class="abt">    <p><b>Your Last Name<span style="color:Red;margin-left: 0px;">*</span></b></p></div>
+                        <div class="abt1"><input type="text" placeholder="Enter last name.." id="txtlast"></div>
+                    </div>   
+                    <div class="form">
+                        <div class="abt"><p><b>Your Mobile No<span style="color:Red;margin-left: 0px;">*</span></b></p></div>
+                        <div class="abt1"> <input type="text" placeholder="Enter Mobile number.." id="bookphoneno"></div>
+                     </div>
+                      <div class="form1">
+                        <div class="abt">    <p><b>Your Email<span style="color:Red;margin-left: 0px;">*</span></b></p></div>
+                        <div class="abt1"><input type="text" placeholder="Enter email.." id="bookemail"></div>
+                    </div> 
+   
+                <div class="form">
+                    <div class="abt">    <p><b>Your Check In<span style="color:Red;margin-left: 0px;">*</b></p></div>
+                    <div class="abt1">
+                    <input type="text" class="certificate" id="txtdeparure" value="DD/MM/YYYY" placeholder="DD/MM/YYYY" />
+                        <i class="fa fa-calendar search-calendar" aria-hidden="true"></i></div>
+                </div>
+  
+                <div class="form1">
+                     <div class="abt">    <p><b>Your Check Out<span style="color:Red;margin-left: 0px;">*</b></p></div>
+                    <div class="abt1">
+                    <input type="text" class="certificate" id="txtcheckout" placeholder="DD/MM/YYYY" value="DD/MM/YYYY" />
+                    <i class="fa fa-calendar search-calendar1" aria-hidden="true"></i></div>
+                </div>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <div class="form5" style="border:none; ">
+                            <!--<button type="submit" class="itg-button" >Book Now</button>-->
+                    <input type="button" class="itg-button" onclick ="return funsubmit()" value ="Book Now" id="btnsubmit" />
+	            </div>
+  	    </div>
+  </div>
+  </div>
+                        
+
+                    </div>
+                                
+
+                        <!--Circular Image Column-->
+                        <div class="circular-image-column col-md-4 col-sm-4 col-xs-6">
+                        	<figure class="image-box wow " data-wow-duration="1500ms" data-wow-delay="300ms">
+                            <img src="images/book2.jpg" onclick="on1()" alt="Family Room " style="width: 100%;cursor:pointer;"></figure>
+                             <h3 style="color:#0a8cea; font-size:18px; text-align:center; padding-top:7px;"><b>Family Room </b></h3> 
+                        </div>
+
+                        <div id="overlay1" >
+                    <div class="mainover">
+  	                <div class="formover">
+  	                <div class="clos" onclick="off1()"> X </div>
+                    <span>Family Room Booking</span><br />
+ 		            <div class="form1over"> 
+                    
+                   <div class="form">
+                            <div class="abt">    <p><b>Your First Name<span style="color:Red;margin-left: 0px;">*</span></b></p></div> 
+                             <div class="abt1"> <input type="text" placeholder="Enter first name.. " id="txtname1" /></div>
+                    </div>
+          
+         
+                    <div class="form1">
+                        <div class="abt">    <p><b>Your Last Name<span style="color:Red;margin-left: 0px;">*</span></b></p></div>
+                        <div class="abt1"><input type="text" placeholder="Enter last name.." id="txtlast1"></div>
+                    </div>   
+                    <div class="form">
+                        <div class="abt"><p><b>Your Mobile No<span style="color:Red;margin-left: 0px;">*</span></b></p></div>
+                        <div class="abt1"> <input type="text" placeholder="Enter Mobile number.." id="bookphoneno1"></div>
+                     </div>
+                      <div class="form1">
+                        <div class="abt">    <p><b>Your Email<span style="color:Red;margin-left: 0px;">*</span></b></p></div>
+                        <div class="abt1"><input type="text" placeholder="Enter email.." id="bookemail1"></div>
+                    </div> 
+   
+                <div class="form">
+                    <div class="abt">    <p><b>Your Check In<span style="color:Red;margin-left: 0px;">*</b></p></div>
+                    <div class="abt1">
+                    <input type="text" class="certificate" id="txtdeparure1" value="DD/MM/YYYY" placeholder="DD/MM/YYYY" />
+                        <i class="fa fa-calendar search-calendar" aria-hidden="true"></i></div>
+                </div>
+  
+                <div class="form1">
+                     <div class="abt">    <p><b>Your Check Out<span style="color:Red;margin-left: 0px;">*</b></p></div>
+                    <div class="abt1">
+                    <input type="text" class="certificate" id="txtcheckout1" placeholder="DD/MM/YYYY" value="DD/MM/YYYY" />
+                    <i class="fa fa-calendar search-calendar1" aria-hidden="true"></i></div>
+                </div>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <div class="form5" style="border:none; ">
+                            <!--<button type="submit" class="itg-button" >Book Now</button>-->
+                    <input type="button" class="itg-button" onclick ="return funsubmit1()" value ="Book Now" id="btnsubmit" />
+	            </div>
+  	    </div>
+  </div>
+  </div>
+                        
+
+                    </div>
+
+
+                        <!--Circular Image Column-->
+                        <div class="circular-image-column col-md-4 col-sm-4 col-xs-6">
+                        	<figure class="image-box " data-wow-duration="1500ms" data-wow-delay="600ms">
+                             <img src="images/book3.jpg" onclick="on2()" alt="Whole Stay" style="width: 100%;cursor:pointer;"></figure>
+                             <h3 style="color:#1fa707; font-size:18px; text-align:center; padding-top:7px;"> <b>Whole Stay</b></h3>
+                        </div>
+
+                      <div id="overlay2" >
+                    <div class="mainover">
+  	                <div class="formover">
+  	                <div class="clos" onclick="off2()"> X </div>
+                    <span>Whole Stay Booking</span><br />
+ 		            <div class="form1over"> 
+                    
+                   <div class="form">
+                            <div class="abt">    <p><b>Your First Name<span style="color:Red;margin-left: 0px;">*</span></b></p></div> 
+                             <div class="abt1"> <input type="text" placeholder="Enter first name.. " id="txtname2" /></div>
+                    </div>
+          
+         
+                    <div class="form1">
+                        <div class="abt">    <p><b>Your Last Name<span style="color:Red;margin-left: 0px;">*</span></b></p></div>
+                        <div class="abt1"><input type="text" placeholder="Enter last name.." id="txtlast2"></div>
+                    </div>   
+                    <div class="form">
+                        <div class="abt"><p><b>Your Mobile No<span style="color:Red;margin-left: 0px;">*</span></b></p></div>
+                        <div class="abt1"> <input type="text" placeholder="Enter Mobile number.." id="bookphoneno2"></div>
+                     </div>
+                      <div class="form1">
+                        <div class="abt">    <p><b>Your Email<span style="color:Red;margin-left: 0px;">*</span></b></p></div>
+                        <div class="abt1"><input type="text" placeholder="Enter email.." id="bookemail2"></div>
+                    </div> 
+   
+                <div class="form">
+                    <div class="abt">    <p><b>Your Check In<span style="color:Red;margin-left: 0px;">*</b></p></div>
+                    <div class="abt1">
+                    <input type="text" class="certificate" id="txtdeparure2" value="DD/MM/YYYY" placeholder="DD/MM/YYYY" />
+                        <i class="fa fa-calendar search-calendar" aria-hidden="true"></i></div>
+                </div>
+  
+                <div class="form1">
+                     <div class="abt">    <p><b>Your Check Out<span style="color:Red;margin-left: 0px;">*</b></p></div>
+                    <div class="abt1">
+                    <input type="text" class="certificate" id="txtcheckout2" placeholder="DD/MM/YYYY" value="DD/MM/YYYY" />
+                    <i class="fa fa-calendar search-calendar1" aria-hidden="true"></i></div>
+                </div>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <div class="form5" style="border:none; ">
+                            <!--<button type="submit" class="itg-button" >Book Now</button>-->
+                    <input type="button" class="itg-button" onclick ="return funsubmit2()" value ="Book Now" id="btnsubmit" />
+	            </div>
+  	    </div>
+  </div>
+  </div>
+                        
+
+                    </div>
+
+
+
+                   </div>
+                    
+                </div>
+                
+                               
+                </div>
+                
+            </div>
+            </section>
+      
+   
+    </div><!--con ends-->
+   
+
+ </div><!--main ends-->
+   </div><!--about ends--> 
+   
+<div class="clearfix"></div>
+   <div class="clearfix"></div> 
+
+    
+    <!--Main Footer-->
+    <footer class="main-footer">
+    	<!--Footer Bar-->
+        <div class="footer-bar">
+   
+            	<ul>
+                <li id="link1" style="border-left:none"><a href="#"><strong style="color:#b48ed2; font-size:20px; text-transform:capitalize; font-weight:500">Quick Links</strong></a></li>
+                	<li id="link"><a href="index.html"><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Home</a></li>
+                    <li id="link"><a href="about.html"  ><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;About Host</a></li>
+                      <li id="link"><a href="facilities.html"  ><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Facilities</a></li>
+                       
+                          <li id="link"><a href="tariffs.html"  ><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Tariffs</a></li>
+                            <li id="link"><a href="gallery.html"  ><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Gallery</a></li>
+                              <li id="link"><a href="bestplaces.html"  ><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Best Places</a></li>
+                                <li id="link"><a href="book.html"  ><i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Book</a></li>
+                                <li id="link"><a href="location.html"> <i class="fa fa-angle-double-right" style="color:#b48ed2;"></i>&nbsp;Location</a></li>
+                </ul>
+            </div>
+    
+        
+    <!--Footer Bottom-->
+        <div class="footer-bottom">
+        	<div class="auto-container">
+            	<div class="centered-content">
+        
+                    <div class="copyright">All rights reserved to <a href="index.html">Stay Wild Home Stay</a><br />
+ Site by <a href="http://www.websmartindia.com/" target="_blank"> Websmartindia</a></div>
+                </div>
+            </div>
+        </div>
+        
+</footer>
+
+
+</body>
+</html>
